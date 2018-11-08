@@ -1,29 +1,16 @@
-import React, { Component } from 'react';
-import Button from '@material-ui/core/Button';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Switch, Route } from 'react-router-dom'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Track the Rack
-          </p>
-          <div>
-            <Button size='large' variant='outlined'>
-              Waiter App
-            </Button>
-            <Button size='large' variant='outlined'>
-              Kitchen App
-            </Button>
-          </div>
-        </header>
-      </div>
-    );
-  }
-}
+import Home from './components/Home';
+import WaiterApp from './components/WaiterApp';
+import KitchenApp from './components/KitchenApp';
+
+const App = () => (
+  <Switch>
+    <Route exact path='/' component={Home}/>
+    <Route exact path='/waiter' component={WaiterApp}/>
+    <Route exact path='/kitchen' component={KitchenApp}/>
+  </Switch>
+)
 
 export default App;
