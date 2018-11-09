@@ -8,8 +8,8 @@ import KitchenApp from './components/KitchenApp';
 const App = () => (
   <Switch>
     <Route exact path='/' component={Home}/>
-    <Route exact path='/waiter' component={WaiterApp}/>
-    <Route exact path='/kitchen' component={KitchenApp}/>
+    <Route path='/waiter' component={WaiterApp}/>
+    <Route path='/kitchen' component={KitchenApp}/>
   </Switch>
 )
 
