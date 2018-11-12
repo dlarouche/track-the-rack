@@ -17,6 +17,11 @@ function getMeals() {
   return database.ref('/meals/').once('value').then(snapshot => snapshot.val())
 }
 
+function updateMeals(meals) {
+  return database.ref('meals/').set(meals);
+}
+
 export default {
-  getMeals
+  getMeals,
+  updateMeals
 }
