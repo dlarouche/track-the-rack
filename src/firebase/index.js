@@ -1,13 +1,17 @@
-import * as firebase from 'firebase';
+import firebase from 'firebase';
+
+const API_KEY = process.env.REACT_APP_API_KEY;
+
+if (!API_KEY) {
+  throw new Error('Missing apiKey env variable for Firebase');
+}
 
 // Initialize Firebase
 const config = {
-  apiKey: "AIzaSyD5un_OIp8bnwaOpXcQhG4j5Taeus-vhyY",
+  apiKey: API_KEY,
   authDomain: "track-the-rack.firebaseapp.com",
   databaseURL: "https://track-the-rack.firebaseio.com",
-  projectId: "track-the-rack",
   storageBucket: "track-the-rack.appspot.com",
-  messagingSenderId: "562811217603"
 };
 firebase.initializeApp(config);
 
