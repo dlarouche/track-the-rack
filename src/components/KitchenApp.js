@@ -2,24 +2,25 @@ import React, { Component }from 'react'
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 
 import IngredientsTab from './IngredientsTab';
 import MealsTab from './MealsTab';
-
-const styles = {
-  tabs: {
-
-  }
-}
 
 
 class KitchenApp extends Component {
 
   state = {
-    ingredients: [],
-    meals: [],
     value: 0
+  }
+
+  componentDidMount() {
+    const { location } = this.props;
+
+    if (location.pathname === '/kitchen/meals') {
+      this.setState({ value: 1 })
+    }
+    
   }
 
   handleChange = (event, value) => {
@@ -38,10 +39,9 @@ class KitchenApp extends Component {
             value={this.state.value}
             onChange={this.handleChange}
             fullWidth
-            style={styles.tabs}
         >
-          <Tab label="Ingredients" />
-          <Tab label="Meals" />
+          <Tab label="Ingredients" component={ Link } to='/kitchen/ingredients'/>
+          <Tab label="Meals" component={ Link } to='/kitchen/meals'/>
         </Tabs>
       </AppBar>
         <Switch>
