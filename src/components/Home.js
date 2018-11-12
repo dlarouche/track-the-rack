@@ -6,11 +6,9 @@ import '../App.css';
 import Button from '@material-ui/core/Button';
 
 const styles = {
-  links: {
-    color: '#718da2'
-  },
   buttons: {
-    margin: '3px 3px 3px 3px'
+    margin: '3px 3px 3px 3px',
+    color: '#718da2'
   }
 }
 
@@ -22,11 +20,11 @@ const Home = () => (
         Track the Rack
       </p>
       <div>
-        <Button size='large' variant='outlined' style={styles.buttons}>
-          <Link to='/waiter' style={styles.links}>Waiter App</Link>
+        <Button size='large' variant='outlined' style={styles.buttons} component={ Link } to='/waiter'>
+          WAITER APP
         </Button>
-        <Button size='large' variant='outlined' style={styles.buttons}>
-          <Link to='/kitchen' style={styles.links}>Kitchen App</Link>
+        <Button size='large' variant='outlined' style={styles.buttons} component={ Link } to='/kitchen'>
+          KITCHEN APP
         </Button>
       </div>
     </header>
