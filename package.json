@@ -1,6 +1,10 @@
 {
   "name": "track-the-rack",
   "version": "0.1.0",
+  "engines": {
+    "npm": "6.4.0",
+    "node": "8.11.3"
+  },
   "private": true,
   "dependencies": {
     "@material-ui/core": "^3.4.0",
