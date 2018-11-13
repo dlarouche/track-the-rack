@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import update from 'immutability-helper';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import Switch from '@material-ui/core/Switch';
+import {
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+  Switch
+} from '@material-ui/core/';
 
 import database from '../firebase/index';
-import { ListItemText } from '@material-ui/core';
 
 class MealsTab extends Component {
   constructor(props) {
@@ -23,9 +25,9 @@ class MealsTab extends Component {
 
   setMeals() {
     database.getMeals()
-    .then((meals) => {
-      if (meals) this.setState({ meals });
-    })
+      .then((meals) => {
+        if (meals) this.setState({ meals });
+      })
   }
 
   handleToggle = value => () => {
@@ -33,10 +35,10 @@ class MealsTab extends Component {
     const mealIndex = meals.findIndex(meal => {
       return meal.name === value;
     })
-    const isActive = !this.state.meals[mealIndex].isActive;
+    const newIsActive = !this.state.meals[mealIndex].isActive;
     
     this.setState({
-      meals: update(this.state.meals, {[mealIndex]: {isActive: {$set: isActive}}})
+      meals: update(this.state.meals, {[mealIndex]: {isActive: {$set: newIsActive}}})
     }, () => {
       database.updateMeals(this.state.meals);
     });

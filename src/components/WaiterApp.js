@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItemText from '@material-ui/core/ListItemText';
+import {
+  List,
+  ListItem,
+  ListItemText
+} from '@material-ui/core';
+
+import database from '../firebase/index';
+
 
 const styles = {
   header: {
@@ -18,17 +24,46 @@ const styles = {
   }
 }
 
-const WaiterApp = () => (
-  <div>
-  <Typography variant="h2" gutterBottom style={styles.header}>
-    Unavailable Meals
-  </Typography>
-    <List>
-      <ListItemText primary='Chicken Pasta' secondary='Update: 9:54pm' style={styles.listItem}/>
-      <ListItemText primary='Chicken Pasta' secondary='Update: 9:54pm' style={styles.listItem}/>
-      <ListItemText primary='Chicken Pasta' secondary='Update: 9:54pm' style={styles.listItem}/>
-    </List>
-  </div>
-)
+class WaiterApp extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      meals: [],
+    }
+  }
+
+  componentDidMount() {
+    database.listenOnMeals((meals => {
+      if (meals) this.setState({ meals });
+    }));
+  }
+
+  render() {
+    const { meals } = this.state;
+
+    const listItems = () => meals.map((meal, key) => {
+      if (!meal.isActive) {
+        return (
+          <ListItem key={key}>
+            <ListItemText primary={meal.name} secondary='Updated: TO DO' style={styles.listItem}/>
+          </ListItem>
+        )
+      }
+      return null;
+    });
+
+    return (
+      <div>
+        <Typography variant="h2" gutterBottom style={styles.header}>
+          Unavailable Meals
+        </Typography>
+        <List>
+          {listItems()}
+        </List>
+      </div>
+    )
+  }
+}
 
 export default WaiterApp;

@@ -18,14 +18,29 @@ firebase.initializeApp(config);
 const database = firebase.database();
 
 function getMeals() {
-  return database.ref('/meals/').once('value').then(snapshot => snapshot.val())
+  return database.ref('/meals/').once('value').then(snapshot => snapshot.val());
 }
 
 function updateMeals(meals) {
   return database.ref('meals/').set(meals);
 }
 
+function listenOnMeals(callback) {
+  return database.ref('meals/').on('value', snapshot => callback(snapshot.val()));
+}
+
+function getIngredients() {
+  return database.ref('/ingredients/').once('value').then(snapshot => snapshot.val());
+}
+
+function updateIngredients(ingredients) {
+  return database.ref('ingredients/').set(ingredients);
+}
+
 export default {
   getMeals,
-  updateMeals
+  updateMeals,
+  listenOnMeals,
+  getIngredients,
+  updateIngredients
 }
