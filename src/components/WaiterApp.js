@@ -5,6 +5,7 @@ import {
   ListItem,
   ListItemText
 } from '@material-ui/core';
+import moment from 'moment';
 
 import database from '../firebase/index';
 
@@ -44,9 +45,10 @@ class WaiterApp extends Component {
 
     const listItems = () => meals.map((meal, key) => {
       if (!meal.isActive) {
+        const timeStamp = meal.updateTimeStamp ? moment(meal.updateTimeStamp).format("YYYY-MM-DD h:mmA") : null;
         return (
           <ListItem key={key}>
-            <ListItemText primary={meal.name} secondary='Updated: TO DO' style={styles.listItem}/>
+            <ListItemText primary={meal.name} secondary={timeStamp ? `Updated: ${timeStamp}` : null} style={styles.listItem}/>
           </ListItem>
         )
       }

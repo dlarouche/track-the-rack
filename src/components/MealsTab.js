@@ -36,9 +36,15 @@ class MealsTab extends Component {
       return meal.name === value;
     })
     const newIsActive = !this.state.meals[mealIndex].isActive;
+    const timeStamp = Date.now();
     
     this.setState({
-      meals: update(this.state.meals, {[mealIndex]: {isActive: {$set: newIsActive}}})
+      meals: update(this.state.meals, {
+        [mealIndex]: {
+          isActive: {$set: newIsActive},
+          updateTimeStamp: {$set: timeStamp}
+        }
+      })
     }, () => {
       database.updateMeals(this.state.meals);
     });
