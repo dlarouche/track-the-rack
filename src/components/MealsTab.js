@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import update from 'immutability-helper';
 import {
   List,
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
-  Switch
+  Switch,
+  Button
 } from '@material-ui/core/';
+import AddIcon from '@material-ui/icons/Add';
 
 import database from '../firebase/index';
+import '../App.css';
 
 class MealsTab extends Component {
   constructor(props) {
@@ -67,9 +71,23 @@ class MealsTab extends Component {
     )
     
     return (
-      <List>
-        {listItems()}
-      </List>
+      <div>
+        <div>
+          <List>
+            {listItems()}
+          </List>
+        </div>
+        <div className='App-button'>
+          <Button
+            variant='fab'
+            color='primary'
+            component={ Link }
+            to='/kitchen/meals/add'
+          >
+            <AddIcon/>
+          </Button>
+        </div>
+      </div>
     )
   }
   

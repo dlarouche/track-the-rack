@@ -18,11 +18,20 @@ firebase.initializeApp(config);
 const database = firebase.database();
 
 function getMeals() {
-  return database.ref('/meals/').once('value').then(snapshot => snapshot.val());
+  return database.ref('/meals/').once('value').then(snapshot => {
+    return Array.isArray(snapshot.val()) ? 
+      snapshot.val()
+      : 
+      Object.values(snapshot.val())
+  })
 }
 
 function updateMeals(meals) {
   return database.ref('meals/').set(meals);
+}
+
+function addMeal(meal) {
+  return database.ref('meals/').push(meal);
 }
 
 function listenOnMeals(callback) {
@@ -40,6 +49,7 @@ function updateIngredients(ingredients) {
 export default {
   getMeals,
   updateMeals,
+  addMeal,
   listenOnMeals,
   getIngredients,
   updateIngredients
