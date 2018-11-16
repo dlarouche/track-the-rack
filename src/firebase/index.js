@@ -35,7 +35,12 @@ function addMeal(meal) {
 }
 
 function listenOnMeals(callback) {
-  return database.ref('meals/').on('value', snapshot => callback(snapshot.val()));
+  return database.ref('meals/').on('value', snapshot => {
+    Array.isArray(snapshot.val()) ? 
+      callback(snapshot.val())
+      : 
+      callback(Object.values(snapshot.val()))
+  })
 }
 
 function getIngredients() {
