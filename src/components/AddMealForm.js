@@ -11,7 +11,6 @@ import {
   Input,
   Chip,
   Dialog,
-  DialogTitle,
   DialogContent,
   DialogActions
 } from '@material-ui/core';

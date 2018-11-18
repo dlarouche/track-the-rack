@@ -44,11 +44,20 @@ function listenOnMeals(callback) {
 }
 
 function getIngredients() {
-  return database.ref('/ingredients/').once('value').then(snapshot => snapshot.val());
+  return database.ref('/ingredients/').once('value').then(snapshot => {
+    return Array.isArray(snapshot.val()) ? 
+    snapshot.val()
+    : 
+    Object.values(snapshot.val())
+  });
 }
 
 function updateIngredients(ingredients) {
   return database.ref('ingredients/').set(ingredients);
+}
+
+function addIngredient(ingredient) {
+  return database.ref('ingredients/').push(ingredient)
 }
 
 export default {
@@ -57,5 +66,6 @@ export default {
   addMeal,
   listenOnMeals,
   getIngredients,
-  updateIngredients
+  updateIngredients,
+  addIngredient
 }

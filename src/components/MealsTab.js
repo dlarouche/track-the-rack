@@ -10,6 +10,7 @@ import {
   Button
 } from '@material-ui/core/';
 import AddIcon from '@material-ui/icons/Add';
+import ClearIcon from '@material-ui/icons/Clear';
 
 import database from '../firebase/index';
 import '../App.css';
@@ -54,6 +55,14 @@ class MealsTab extends Component {
     });
   }
 
+  handleDeleteTap = value => () => {
+    this.setState({
+      meals: this.state.meals.filter(meal => meal.name !== value)
+    }, () => {
+      database.updateMeals(this.state.meals);
+    });
+  }
+
   render() {
     const { meals } = this.state;
 
@@ -66,6 +75,12 @@ class MealsTab extends Component {
             onChange={this.handleToggle(meal.name)}
             checked={meal.isActive}
           />
+          <Button
+            style={{color: 'red'}}
+            onClick={this.handleDeleteTap(meal.name)}
+          >
+            <ClearIcon/>
+          </Button>
         </ListItemSecondaryAction>
       </ListItem>
     )

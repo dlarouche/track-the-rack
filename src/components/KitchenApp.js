@@ -7,6 +7,7 @@ import { Switch, Route, Link } from 'react-router-dom';
 import IngredientsTab from './IngredientsTab';
 import MealsTab from './MealsTab';
 import AddMealForm from './AddMealForm';
+import AddIngredientForm from './AddIngredientForm';
 
 
 class KitchenApp extends Component {
@@ -48,6 +49,7 @@ class KitchenApp extends Component {
         <Switch>
           <Route exact path='/kitchen' component={IngredientsTab}/>
           <Route exact path='/kitchen/ingredients' component={IngredientsTab}/>
+          <Route exact path='/kitchen/ingredients/add' component={AddIngredientForm}/>
           <Route exact path='/kitchen/meals' component={MealsTab}/>
           <Route exact path='/kitchen/meals/add' component={AddMealForm}/>
         </Switch>
