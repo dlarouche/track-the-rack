@@ -43,6 +43,7 @@ class IngredientsTab extends Component {
           
           if (meal.ingredients.indexOf(ingredient.name) > -1) { // the meal contains this ingredient
             meal.isActive = false;
+            meal.updateTimeStamp = Date.now();
           }
           return meal;
         })
