@@ -43,6 +43,8 @@ class WaiterApp extends Component {
   render() {
     const { meals } = this.state;
 
+    meals.sort((a,b) => new Date(b.updateTimeStamp) - new Date(a.updateTimeStamp)); // sort by time (most recent first)
+
     const listItems = () => meals.map((meal, key) => {
       if (!meal.isActive) {
         const timeStamp = meal.updateTimeStamp ? moment(meal.updateTimeStamp).format("YYYY-MM-DD h:mmA") : null;
